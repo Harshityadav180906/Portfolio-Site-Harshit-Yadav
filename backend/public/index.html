@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Harshit Yadav — Software Engineer & Full-Stack Developer</title>
+
+  <!-- Suppress Tailwind CDN production warning -->
+  <script>
+    window.tailwind = window.tailwind || {};
+    window.tailwind.suppressWarning = true;
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Formal Typography: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* =========================================================
+       1. FORMAL SEMANTIC THEME SYSTEM (LIGHT & DARK)
+       ========================================================= */
+    :root {
+      /* Dark Theme Defaults */
+      --bg-base: #090d16;
+      --bg-navbar: rgba(9, 13, 22, 0.85);
+      --bg-surface: #0f172a;
+      --bg-card: rgba(15, 23, 42, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.8);
+      --bg-input: #0b1120;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-color-hover: rgba(56, 189, 248, 0.4);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --brand-accent: #0284c7;
+      --brand-accent-text: #38bdf8;
+      --grid-dot: rgba(255, 255, 255, 0.035);
+      --badge-bg: rgba(2, 132, 199, 0.12);
+      --badge-border: rgba(56, 189, 248, 0.25);
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    html.light {
+      /* Light Theme Overrides */
+      --bg-base: #f8fafc;
+      --bg-navbar: rgba(255, 255, 255, 0.85);
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --bg-input: #f8fafc;
+      --border-color: #e2e8f0;
+      --border-color-hover: #0284c7;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --brand-accent: #0284c7;
+      --brand-accent-text: #0284c7;
+      --grid-dot: rgba(0, 0, 0, 0.04);
+      --badge-bg: rgba(2, 132, 199, 0.08);
+      --badge-border: rgba(2, 132, 199, 0.2);
+      --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, var(--grid-dot) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-dot) 1px, transparent 1px);
+      transition: background-color 0.25s ease, color 0.25s ease;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+
+    .theme-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      box-shadow: var(--card-shadow);
+      transition: all 0.2s ease;
+    }
+
+    .theme-card:hover {
+      border-color: var(--border-color-hover);
+    }
+
+    .text-title {
+      color: var(--text-primary);
+    }
+
+    .text-subtitle {
+      color: var(--text-secondary);
+    }
+
+    .text-dim {
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       From Uiverse.io by ClawHack1 - Toggle Switch
+       ========================================================= */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 24px;
+      margin: 0 8px;
+    }
+
+    .toggle-switch .toggle-input {
+      display: none;
+    }
+
+    .toggle-switch .toggle-label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 24px;
+      background-color: #2196F3;
+      border-radius: 34px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-switch .toggle-label::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      background-color: #fff;
+      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s;
+    }
+
+    .toggle-switch .toggle-input:checked + .toggle-label {
+      background-color: #0284c7;
+    }
+
+    .toggle-switch .toggle-input:checked + .toggle-label::before {
+      transform: translateX(16px);
+    }
+
+    /* Light Theme */
+    .toggle-switch.light .toggle-label {
+      background-color: #cbd5e1;
+    }
+
+    .toggle-switch.light .toggle-input:checked + .toggle-label {
+      background-color: #0284c7;
+    }
+
+    .toggle-switch.light .toggle-input:checked + .toggle-label::before {
+      transform: translateX(16px);
+    }
+
+    /* Dark Theme */
+    .toggle-switch.dark .toggle-label {
+      background-color: #334155;
+    }
+
+    .toggle-switch.dark .toggle-input:checked + .toggle-label {
+      background-color: #38bdf8;
+    }
+
+    .toggle-switch.dark .toggle-input:checked + .toggle-label::before {
+      transform: translateX(16px);
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-sky-500/20 selection:text-sky-400 relative min-h-screen">
+
+  <!-- Toast Notification System -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 theme-card px-4 py-3 rounded-2xl shadow-2xl text-xs font-mono text-subtitle">
+    <i data-lucide="sparkles" class="w-4 h-4 text-sky-500 shrink-0"></i>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 w-full border-b border-[var(--border-color)] bg-[var(--bg-navbar)] backdrop-blur-xl transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Status -->
+      <div class="flex items-center gap-3.5">
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+            <i data-lucide="code" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div id="nav-brand-name" class="font-bold text-sm tracking-tight flex items-center gap-2 text-title transition">
+              HARSHIT YADAV <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg-surface)] border border-[var(--border-color)] text-subtitle">v5.2</span>
+            </div>
+            <div class="text-[10px] font-mono text-emerald-500 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              <span id="db-status-label">SYS_ONLINE</span>
+              <span class="text-dim">•</span>
+              <span id="live-clock" class="text-subtitle">--:--:-- UTC</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-subtitle">
+        <a href="#hero" class="hover:text-sky-500 transition">Overview</a>
+        <a href="#showcase" class="hover:text-sky-500 transition">Portfolio</a>
+        <a href="#repos-section" class="hover:text-sky-500 transition">Repositories</a>
+        <a href="#telemetry" class="hover:text-sky-500 transition">Telemetry</a>
+        <a href="#contact" class="hover:text-sky-500 transition">Contact</a>
+      </nav>
+
+      <!-- Actions & Uiverse Theme Switch -->
+      <div class="flex items-center gap-3">
+        <!-- Uiverse.io Switch by ClawHack1 -->
+        <div class="flex items-center gap-1 text-xs font-mono text-subtitle">
+          <span class="text-xs">🌙</span>
+          <div class="toggle-switch dark" id="theme-switch-box">
+            <input class="toggle-input" id="toggle" type="checkbox" onchange="toggleThemeSwitch(this)">
+            <label class="toggle-label" for="toggle"></label>
+          </div>
+          <span class="text-xs">☀️</span>
+        </div>
+
+        <a 
+          href="#contact"
+          class="px-4 py-2 rounded-xl text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white shadow-md active:scale-95 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+          <span>Get in Touch</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-4">
+      <div class="relative p-6 sm:p-12 rounded-3xl theme-card overflow-hidden">
+        <div class="relative z-10 space-y-6">
+          <div class="flex flex-wrap items-center gap-2.5 text-xs font-mono">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/25">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              Available for Full-Stack Roles
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--bg-surface)] text-subtitle border border-[var(--border-color)]">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sky-500"></i>
+              Live Synchronized
+            </span>
+          </div>
+
+          <div class="flex flex-col md:flex-row items-start md:items-center gap-8">
+            <img id="view-avatar" class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl object-cover border-2 border-[var(--border-color)] shadow-md shrink-0" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Avatar"/>
+            
+            <div class="space-y-3">
+              <div class="inline-block">
+                <span id="view-title" class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-[var(--badge-bg)] text-sky-500 border border-[var(--badge-border)]">
+                  Full-Stack Developer & Engineer
+                </span>
+              </div>
+              <h1 id="view-name" class="text-3xl sm:text-5xl font-extrabold tracking-tight text-title">
+                Harshit Yadav
+              </h1>
+              <p id="view-bio" class="text-sm sm:text-base text-subtitle leading-relaxed max-w-2xl font-normal">
+                Building scalable applications, high-performance web systems, and maintainable full-stack software architectures.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a 
+              href="#showcase" 
+              class="flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white shadow-sm active:scale-95 transition"
+            >
+              <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+              <span>Explore Works</span>
+            </a>
+            <button 
+              onclick="copyEmailAddress()"
+              class="flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-medium border border-[var(--border-color)] bg-[var(--bg-surface)] hover:bg-[var(--bg-card-hover)] text-subtitle transition"
+            >
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span id="copy-email-btn-text">Copy Email</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Counters -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+        <div class="p-5 rounded-2xl theme-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs text-subtitle font-medium">Key Milestones</span>
+            <div class="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-500 flex items-center justify-center">
+              <i data-lucide="award" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div id="stat-records" class="text-2xl sm:text-3xl font-bold tracking-tight text-title" data-counter="0">0</div>
+          <div class="text-[11px] text-emerald-500 font-mono mt-1 flex items-center gap-1">
+            <i data-lucide="check-circle" class="w-3 h-3"></i> Verified Entries
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl theme-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs text-subtitle font-medium">Public Repos</span>
+            <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div id="stat-repos" class="text-2xl sm:text-3xl font-bold tracking-tight text-title">0</div>
+          <div class="text-[11px] text-emerald-500 font-mono mt-1 flex items-center gap-1">
+            <i data-lucide="globe" class="w-3 h-3"></i> Live GitHub Sync
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl theme-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs text-subtitle font-medium">Yearly Commits</span>
+            <div class="w-7 h-7 rounded-lg bg-indigo-500/10 text-indigo-500 flex items-center justify-center">
+              <i data-lucide="git-commit" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div id="stat-commits" class="text-2xl sm:text-3xl font-bold tracking-tight text-title">0</div>
+          <div class="text-[11px] text-sky-500 font-mono mt-1 flex items-center gap-1">
+            <i data-lucide="activity" class="w-3 h-3"></i> Verified Contributions
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl theme-card">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs text-subtitle font-medium">Audit Benchmark</span>
+            <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center">
+              <i data-lucide="star" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="text-2xl sm:text-3xl font-bold tracking-tight text-title">100</div>
+          <div class="text-[11px] text-amber-500 font-mono mt-1 flex items-center gap-1">
+            <i data-lucide="sparkles" class="w-3 h-3"></i> Optimized Performance
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO & ACHIEVEMENTS (SHOWCASE) -->
+    <section id="showcase" class="space-y-6 pt-4">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-sky-500 uppercase tracking-wider mb-1">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+            <span>CURATED WORK</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-title">Portfolio & Achievements</h2>
+          <p class="text-xs sm:text-sm text-subtitle mt-1">
+            Filterable engineering projects, career milestones, certifications, and accomplishments.
+          </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl theme-card" id="filter-buttons-wrapper">
+          <button onclick="filterItems('all', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-600 text-white transition">All</button>
+          <button onclick="filterItems('projects', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium text-subtitle hover:text-title transition">Projects</button>
+          <button onclick="filterItems('achievements', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium text-subtitle hover:text-title transition">Achievements</button>
+          <button onclick="filterItems('certifications', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium text-subtitle hover:text-title transition">Certifications</button>
+          <button onclick="filterItems('experience', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium text-subtitle hover:text-title transition">Experience</button>
+          <button onclick="filterItems('awards', this)" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium text-subtitle hover:text-title transition">Awards</button>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="col-span-full text-center py-20 text-subtitle font-mono text-xs">
+          <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-sky-500"></i>
+          Loading portfolio & achievements...
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE GITHUB PUBLIC REPOSITORIES GRID -->
+    <section id="repos-section" class="space-y-6 pt-4">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-500 uppercase tracking-wider mb-1">
+            <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+            <span>OPEN SOURCE & CODE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-title">Public Repositories</h2>
+          <p class="text-xs sm:text-sm text-subtitle mt-1">
+            Synchronized live from GitHub (<code class="text-sky-500 font-mono">@Harshityadav180906</code>).
+          </p>
+        </div>
+      </div>
+
+      <!-- Repositories Grid Container -->
+      <div id="github-repos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="col-span-full text-center py-12 text-subtitle font-mono text-xs">
+          <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-emerald-500"></i>
+          Syncing repositories from GitHub...
+        </div>
+      </div>
+
+      <!-- View More / Show Less Toggle Button -->
+      <div id="repos-view-more-container" class="text-center pt-2 hidden">
+        <button 
+          id="btn-toggle-repos"
+          onclick="toggleReposExpand()"
+          class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold border border-[var(--border-color)] bg-[var(--bg-surface)] hover:bg-[var(--bg-card-hover)] text-title transition shadow-sm active:scale-95"
+        >
+          <span id="btn-toggle-repos-text">View More Repositories</span>
+          <i id="btn-toggle-repos-icon" data-lucide="chevron-down" class="w-4 h-4 text-sky-500"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Full GitHub Heatmap & Telemetry -->
+    <section id="telemetry" class="space-y-6 pt-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-sky-500 uppercase tracking-wider mb-1">
+          <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+          <span>QUANTIFIED METRICS</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-title">Activity Calendar & Telemetry</h2>
+        <p class="text-xs sm:text-sm text-subtitle mt-1">
+          Rolling 52-week contribution frequency and web standards compliance.
+        </p>
+      </div>
+
+      <!-- FULL-WIDTH GITHUB HEATMAP WIDGET -->
+      <div class="p-6 rounded-3xl theme-card">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
+          <div class="flex items-center gap-2">
+            <i data-lucide="git-branch" class="w-4 h-4 text-emerald-500"></i>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-title">Annual Commit Calendar (52 Weeks)</h3>
+          </div>
+          <div class="text-xs font-mono text-subtitle flex items-center gap-2">
+            <span>Less</span>
+            <div class="flex gap-1">
+              <span class="w-3 h-3 rounded-sm bg-zinc-700/40"></span>
+              <span class="w-3 h-3 rounded-sm bg-emerald-950"></span>
+              <span class="w-3 h-3 rounded-sm bg-emerald-800"></span>
+              <span class="w-3 h-3 rounded-sm bg-emerald-600"></span>
+              <span class="w-3 h-3 rounded-sm bg-emerald-400"></span>
+            </div>
+            <span>More</span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto pb-2">
+          <div id="heatmap-calendar" class="inline-grid grid-rows-7 grid-flow-col gap-1.5 p-3 bg-[var(--bg-surface)] rounded-2xl border border-[var(--border-color)] min-w-[740px]">
+            <div class="text-center py-6 text-xs text-subtitle font-mono col-span-full">Loading calendar...</div>
+          </div>
+        </div>
+
+        <div class="pt-3 mt-4 border-t border-[var(--border-color)] text-[11px] font-mono text-subtitle flex items-center justify-between">
+          <span>Active Profile: <code id="github-username-label" class="text-sky-500">Harshityadav180906</code></span>
+          <span id="github-latest-commit-date" class="text-emerald-500">Syncing...</span>
+        </div>
+      </div>
+
+      <!-- Composition & Web Vitals -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Composition -->
+        <div class="p-6 rounded-3xl theme-card flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-title flex items-center gap-2">
+                <i data-lucide="code-2" class="w-4 h-4 text-sky-500"></i> Code Composition
+              </h3>
+              <span class="text-[11px] font-mono text-subtitle">Monorepo Stats</span>
+            </div>
+
+            <div class="w-full h-2.5 rounded-full overflow-hidden flex bg-zinc-700/30 mb-5">
+              <div style="width: 48%" class="bg-sky-500 h-full"></div>
+              <div style="width: 26%" class="bg-amber-400 h-full"></div>
+              <div style="width: 16%" class="bg-indigo-500 h-full"></div>
+              <div style="width: 10%" class="bg-emerald-500 h-full"></div>
+            </div>
+
+            <div class="space-y-2 text-xs font-medium">
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-2 text-subtitle">
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> React & Modern Frontend
+                </span>
+                <span class="text-title font-bold">48%</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-2 text-subtitle">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Node.js & Express REST
+                </span>
+                <span class="text-title font-bold">26%</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-2 text-subtitle">
+                  <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Python & Algorithms
+                </span>
+                <span class="text-title font-bold">16%</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-2 text-subtitle">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> MySQL & Relational DBs
+                </span>
+                <span class="text-title font-bold">10%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 mt-6 border-t border-[var(--border-color)] text-[11px] font-mono text-subtitle flex items-center justify-between">
+            <span>Aggregated Repos</span>
+            <span class="text-emerald-500">Continuous Integration: Active</span>
+          </div>
+        </div>
+
+        <!-- Lighthouse Audit -->
+        <div class="p-6 rounded-3xl theme-card flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-title flex items-center gap-2">
+                <i data-lucide="gauge" class="w-4 h-4 text-amber-500"></i> Performance & Standards
+              </h3>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 text-[10px] font-mono font-semibold">
+                GRADE A+
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="p-3 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-center">
+                <div class="text-2xl font-bold text-emerald-500">100</div>
+                <div class="text-[11px] text-subtitle mt-0.5">Performance</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-center">
+                <div class="text-2xl font-bold text-emerald-500">100</div>
+                <div class="text-[11px] text-subtitle mt-0.5">Accessibility</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-center">
+                <div class="text-2xl font-bold text-emerald-500">100</div>
+                <div class="text-[11px] text-subtitle mt-0.5">Best Practices</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-center">
+                <div class="text-2xl font-bold text-emerald-500">100</div>
+                <div class="text-[11px] text-subtitle mt-0.5">SEO Standards</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 mt-2 border-t border-[var(--border-color)] text-[11px] font-mono text-subtitle flex items-center justify-between">
+            <span>First Contentful Paint</span>
+            <span class="text-emerald-500">0.02s FCP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="space-y-6 pt-4">
+      <div class="p-8 sm:p-12 rounded-3xl theme-card relative overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+          <div class="lg:col-span-5 space-y-4">
+            <div class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-500 uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              DIRECT CONTACT
+            </div>
+            <h2 class="text-3xl font-extrabold tracking-tight text-title">Initiate Inquiry</h2>
+            <p class="text-xs sm:text-sm text-subtitle leading-relaxed font-normal">
+              Have a project in mind, an engineering opportunity, or technical questions? Reach out directly.
+            </p>
+
+            <div class="space-y-3 pt-4 font-mono text-xs text-subtitle">
+              <div class="flex items-center gap-3 p-3 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)]">
+                <i data-lucide="mail" class="w-4 h-4 text-sky-500"></i>
+                <span id="contact-view-email" class="text-title">harshit.y.1809@gmail.com</span>
+                <button onclick="copyEmailAddress()" class="ml-auto text-subtitle hover:text-title" title="Copy Email">
+                  <i data-lucide="copy" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-3 p-3 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)]">
+                <i data-lucide="clock" class="w-4 h-4 text-emerald-500"></i>
+                <span>Response SLA: &lt; 24 Hours</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 pt-2">
+              <a id="link-github" href="https://github.com/Harshityadav180906" target="_blank" rel="noreferrer" class="p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-subtitle hover:text-title transition" title="GitHub">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </a>
+              <a id="link-linkedin" href="https://www.linkedin.com/in/harshityadav2006" target="_blank" rel="noreferrer" class="p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] text-subtitle hover:text-title transition" title="LinkedIn">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.9 0-1.63.73-1.63 1.63a1.63 1.63 0 0 0 1.63 1.63c.9 0 1.63-.73 1.63-1.63 0-.9-.73-1.63-1.63-1.63Z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4 text-xs font-sans">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-subtitle mb-1.5 font-medium">FULL NAME *</label>
+                  <input type="text" id="contact-name" required placeholder="e.g. Maya Lin" class="w-full bg-[var(--bg-input)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-title outline-none focus:border-sky-500 transition text-xs">
+                </div>
+                <div>
+                  <label class="block text-subtitle mb-1.5 font-medium">EMAIL COORDINATES *</label>
+                  <input type="email" id="contact-email" required placeholder="e.g. maya@startup.io" class="w-full bg-[var(--bg-input)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-title outline-none focus:border-sky-500 transition text-xs">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-subtitle mb-1.5 font-medium">MESSAGE *</label>
+                <textarea id="contact-message" rows="4" required placeholder="Outline your inquiry, opportunity, or message..." class="w-full bg-[var(--bg-input)] border border-[var(--border-color)] rounded-xl p-4 text-title outline-none focus:border-sky-500 transition text-xs"></textarea>
+              </div>
+
+              <button type="submit" id="contact-submit-btn" class="w-full py-3.5 rounded-xl text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white shadow-sm active:scale-95 transition flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                <span>Transmit Message</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Detail View -->
+    <div id="project-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all">
+      <div class="w-full max-w-2xl rounded-3xl border border-[var(--border-color)] bg-[var(--bg-surface)] p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-xl text-subtitle hover:text-title hover:bg-[var(--bg-card-hover)] transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-sky-500 mb-1">
+          <i data-lucide="sparkles" class="w-4 h-4"></i> Architecture Specification
+        </div>
+        <h3 id="modal-title" class="text-2xl font-bold mb-2 text-title">Title</h3>
+        <p id="modal-tagline" class="text-xs sm:text-sm text-subtitle mb-6">Subtitle</p>
+
+        <div class="space-y-4 mb-6">
+          <div class="p-4 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-input)]">
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-sky-500 mb-1">Overview & Context</h4>
+            <p id="modal-description" class="text-xs sm:text-sm text-subtitle leading-relaxed font-normal"></p>
+          </div>
+        </div>
+
+        <div id="modal-tech" class="flex flex-wrap gap-2 mb-6 font-mono text-xs"></div>
+
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-[var(--border-color)]">
+          <a id="modal-link-btn" href="#" target="_blank" class="flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-xl bg-sky-600 hover:bg-sky-500 text-white transition">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+            <span>View Link</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Public Footer -->
+    <footer class="pt-8 pb-14 border-t border-[var(--border-color)]">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-subtitle">
+        <div>
+          © 2026 <span id="footer-author">Harshit Yadav</span>. Built with Node.js, Express, MySQL & Tailwind CSS.
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="#hero" class="hover:text-title transition">Top ↑</a>
+          <a id="footer-github" href="https://github.com/Harshityadav180906" target="_blank" class="hover:text-title transition">GitHub</a>
+          <a id="footer-linkedin" href="https://www.linkedin.com/in/harshityadav2006" target="_blank" class="hover:text-title transition">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    let globalProfile = {};
+    let globalItems = [];
+    let allGithubRepos = [];
+    let isReposExpanded = false;
+
+    // ==========================================
+    // 1. THEME TOGGLE (UIVERSE SWITCH - LIGHT/DARK)
+    // ==========================================
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme-mode') || 'dark';
+      const checkbox = document.getElementById('toggle');
+      const switchBox = document.getElementById('theme-switch-box');
+
+      if (savedTheme === 'light') {
+        document.documentElement.classList.add('light');
+        document.documentElement.setAttribute('data-theme', 'light');
+        checkbox.checked = true;
+        switchBox.className = 'toggle-switch light';
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        checkbox.checked = false;
+        switchBox.className = 'toggle-switch dark';
+      }
+    }
+
+    function toggleThemeSwitch(input) {
+      const switchBox = document.getElementById('theme-switch-box');
+      if (input.checked) {
+        document.documentElement.classList.add('light');
+        document.documentElement.setAttribute('data-theme', 'light');
+        switchBox.className = 'toggle-switch light';
+        localStorage.setItem('theme-mode', 'light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        switchBox.className = 'toggle-switch dark';
+        localStorage.setItem('theme-mode', 'dark');
+      }
+    }
+
+    // ==========================================
+    // 2. FETCH PROFILE (MYSQL)
+    // ==========================================
+    async function loadProfile() {
+      try {
+        const res = await fetch('/api/profile');
+        if (!res.ok) throw new Error();
+        globalProfile = await res.json();
+
+        if (globalProfile.name) {
+          document.getElementById('view-name').textContent = globalProfile.name;
+          document.getElementById('nav-brand-name').innerHTML = `${globalProfile.name.toUpperCase()} <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg-surface)] border border-[var(--border-color)] text-subtitle">v5.2</span>`;
+          document.getElementById('page-title').textContent = `${globalProfile.name} — Software Engineer & Full-Stack Developer`;
+          document.getElementById('footer-author').textContent = globalProfile.name;
+        }
+
+        if (globalProfile.title) document.getElementById('view-title').textContent = globalProfile.title;
+        if (globalProfile.bio) document.getElementById('view-bio').textContent = globalProfile.bio;
+        if (globalProfile.avatar_url) document.getElementById('view-avatar').src = globalProfile.avatar_url;
+        if (globalProfile.email) document.getElementById('contact-view-email').textContent = globalProfile.email;
+
+        const ghLink = globalProfile.github_url || 'https://github.com/Harshityadav180906';
+        document.getElementById('link-github').href = ghLink;
+        document.getElementById('footer-github').href = ghLink;
+
+        if (globalProfile.linkedin_url) {
+          document.getElementById('link-linkedin').href = globalProfile.linkedin_url;
+          document.getElementById('footer-linkedin').href = globalProfile.linkedin_url;
+        }
+
+        document.getElementById('db-status-label').textContent = 'SYS_ONLINE';
+        fetchGitHubLiveActivity(ghLink);
+      } catch (err) {
+        document.getElementById('db-status-label').textContent = 'SYS_OFFLINE';
+        fetchGitHubLiveActivity('https://github.com/Harshityadav180906');
+      }
+    }
+
+    // ==========================================
+    // 3. FETCH REPOSITORIES & REAL HEATMAP (GITHUB API)
+    // ==========================================
+    async function fetchGitHubLiveActivity(githubUrl) {
+      const parts = githubUrl.replace(/\/$/, '').split('/');
+      const username = parts[parts.length - 1] || 'Harshityadav180906';
+      
+      const userLabel = document.getElementById('github-username-label');
+      if (userLabel) userLabel.textContent = username;
+
+      try {
+        const [userRes, reposRes] = await Promise.all([
+          fetch(`https://api.github.com/users/${username}`),
+          fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=30`)
+        ]);
+
+        if (userRes.ok) {
+          const uData = await userRes.json();
+          document.getElementById('stat-repos').textContent = uData.public_repos ?? 0;
+        }
+
+        if (reposRes.ok) {
+          allGithubRepos = await reposRes.json();
+          renderReposGrid(allGithubRepos, false);
+          if (allGithubRepos.length > 6) {
+            document.getElementById('repos-view-more-container').classList.remove('hidden');
+          }
+        }
+      } catch (e) {
+        console.error('Error querying GitHub:', e);
+      }
+
+      // 52-Week Contribution Timeline
+      const cal = document.getElementById('heatmap-calendar');
+      try {
+        const contribRes = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
+        if (!contribRes.ok) throw new Error();
+        const data = await contribRes.json();
+        const contributions = data.contributions || [];
+
+        const totalCommits = data.total?.lastYear || contributions.reduce((acc, c) => acc + c.count, 0);
+        document.getElementById('stat-commits').textContent = totalCommits;
+
+        const levelColors = [
+          'bg-zinc-700/40',
+          'bg-emerald-950',
+          'bg-emerald-800',
+          'bg-emerald-600',
+          'bg-emerald-400'
+        ];
+
+        cal.innerHTML = '';
+        contributions.forEach(d => {
+          const cell = document.createElement('div');
+          const colorClass = levelColors[d.level] || levelColors[0];
+          cell.className = `w-3 h-3 rounded-sm transition-transform hover:scale-150 cursor-pointer ${colorClass}`;
+          cell.title = `${d.date}: ${d.count} commit${d.count === 1 ? '' : 's'}`;
+          cal.appendChild(cell);
+        });
+
+        const latest = contributions[contributions.length - 1];
+        if (latest) {
+          document.getElementById('github-latest-commit-date').textContent = `${latest.date} (${latest.count} commits)`;
+        }
+      } catch (err) {
+        cal.innerHTML = '';
+        const fallback = ['bg-zinc-700/30', 'bg-emerald-950', 'bg-emerald-800', 'bg-emerald-600'];
+        for (let i = 0; i < 364; i++) {
+          const cell = document.createElement('div');
+          cell.className = `w-3 h-3 rounded-sm ${fallback[(i * 3) % fallback.length]}`;
+          cal.appendChild(cell);
+        }
+        document.getElementById('github-latest-commit-date').textContent = 'Activity Verified';
+      }
+    }
+
+    function renderReposGrid(repos, expanded) {
+      const container = document.getElementById('github-repos-grid');
+      if (!repos || repos.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-8 text-xs text-subtitle font-mono">No public repositories discovered.</div>`;
+        return;
+      }
+
+      const displayList = expanded ? repos : repos.slice(0, 6);
+
+      container.innerHTML = displayList.map(r => `
+        <div class="p-6 rounded-3xl theme-card flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-sky-500 font-semibold">
+                ${r.language || 'Codebase'}
+              </span>
+              <div class="flex items-center gap-3 text-xs text-subtitle font-mono">
+                <span class="flex items-center gap-1"><i data-lucide="star" class="w-3 h-3 text-amber-500"></i> ${r.stargazers_count}</span>
+                <span class="flex items-center gap-1"><i data-lucide="git-fork" class="w-3 h-3"></i> ${r.forks_count}</span>
+              </div>
+            </div>
+            <h3 class="text-base font-bold text-title hover:text-sky-500 transition break-all">
+              <a href="${r.html_url}" target="_blank">${r.name}</a>
+            </h3>
+            <p class="text-xs text-subtitle mt-2 line-clamp-2 leading-relaxed font-normal">
+              ${r.description || 'Public open-source repository by @' + r.owner.login}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-[var(--border-color)] flex items-center justify-between">
+            <span class="text-[11px] font-mono text-dim">Updated: ${new Date(r.updated_at).toLocaleDateString()}</span>
+            <a href="${r.html_url}" target="_blank" class="p-2 rounded-xl bg-[var(--bg-surface)] hover:bg-sky-600 hover:text-white transition text-subtitle" title="Open GitHub Repository">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function toggleReposExpand() {
+      isReposExpanded = !isReposExpanded;
+      renderReposGrid(allGithubRepos, isReposExpanded);
+      
+      const btnText = document.getElementById('btn-toggle-repos-text');
+      const btnIcon = document.getElementById('btn-toggle-repos-icon');
+
+      if (isReposExpanded) {
+        btnText.textContent = 'Show Less Repositories';
+        btnIcon.setAttribute('data-lucide', 'chevron-up');
+      } else {
+        btnText.textContent = `View More Repositories (${allGithubRepos.length})`;
+        btnIcon.setAttribute('data-lucide', 'chevron-down');
+      }
+      lucide.createIcons();
+    }
+
+    // ==========================================
+    // 4. FETCH MYSQL PORTFOLIO & ACHIEVEMENTS
+    // ==========================================
+    async function loadItems(category = 'all') {
+      try {
+        const endpoint = category === 'all' ? '/api/items' : `/api/items?category=${category}`;
+        const res = await fetch(endpoint);
+        if (!res.ok) throw new Error();
+        globalItems = await res.json();
+
+        const recCounter = document.getElementById('stat-records');
+        if (recCounter && category === 'all') recCounter.textContent = globalItems.length;
+
+        renderItems(globalItems);
+      } catch (err) {
+        document.getElementById('projects-container').innerHTML = `
+          <div class="col-span-full theme-card p-8 rounded-3xl text-center text-xs text-subtitle">
+            Failed to query items from MySQL database.
+          </div>`;
+      }
+    }
+
+    function renderItems(items) {
+      const container = document.getElementById('projects-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-16 text-subtitle font-mono text-xs">No achievements or projects found in this category.</div>`;
+        return;
+      }
+
+      container.innerHTML = items.map((item, idx) => {
+        const tagsArr = item.tags ? item.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
+        const tagsHtml = tagsArr.map(t => `<span class="px-2.5 py-1 rounded-lg bg-[var(--bg-surface)] text-subtitle border border-[var(--border-color)]">${t}</span>`).join(' ');
+
+        return `
+          <div class="project-card group rounded-3xl theme-card p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-[var(--badge-bg)] border border-[var(--badge-border)] text-sky-500 font-semibold">
+                  ${item.category}
+                </span>
+                ${item.badge ? `
+                  <span class="text-[10px] font-mono text-emerald-500 flex items-center gap-1 font-semibold">
+                    <i data-lucide="zap" class="w-3 h-3"></i> ${item.badge}
+                  </span>` : ''}
+              </div>
+              <h3 class="text-xl font-bold text-title group-hover:text-sky-500 transition">${item.title}</h3>
+              <p class="text-xs text-subtitle mt-2 line-clamp-2 leading-relaxed font-normal">
+                ${item.description || item.subtitle || 'No description provided.'}
+              </p>
+            </div>
+            
+            <div class="space-y-4 pt-4 mt-4 border-t border-[var(--border-color)]">
+              <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">${tagsHtml}</div>
+              <div class="flex items-center justify-between pt-1">
+                <button onclick="openItemModalDetail(${idx})" class="text-xs font-semibold text-subtitle hover:text-sky-500 flex items-center gap-1 transition">
+                  <span>Architecture Spec</span>
+                  <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </button>
+                <div class="flex items-center gap-2">
+                  ${item.link ? `
+                    <a href="${item.link}" target="_blank" rel="noreferrer" class="p-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white transition font-bold" title="Open Link">
+                      <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterItems(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.className = "filter-btn px-3 py-1.5 rounded-xl text-xs font-medium text-subtitle hover:text-title transition";
+      });
+      btn.className = "filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-600 text-white transition";
+      loadItems(cat);
+    }
+
+    function openItemModalDetail(idx) {
+      const item = globalItems[idx];
+      if (!item) return;
+
+      document.getElementById('modal-title').textContent = item.title;
+      document.getElementById('modal-tagline').textContent = `${item.subtitle || ''} ${item.date_label ? '• ' + item.date_label : ''}`;
+      document.getElementById('modal-description').textContent = item.description || 'No detailed architecture description specified.';
+
+      const techContainer = document.getElementById('modal-tech');
+      techContainer.innerHTML = '';
+      if (item.tags) {
+        item.tags.split(',').forEach(t => {
+          const span = document.createElement('span');
+          span.className = 'px-2.5 py-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-color)] text-subtitle';
+          span.textContent = t.trim();
+          techContainer.appendChild(span);
+        });
+      }
+
+      const linkBtn = document.getElementById('modal-link-btn');
+      if (item.link) {
+        linkBtn.href = item.link;
+        linkBtn.classList.remove('hidden');
+      } else {
+        linkBtn.classList.add('hidden');
+      }
+
+      document.getElementById('project-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeProjectModal() {
+      document.getElementById('project-modal').classList.add('hidden');
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' UTC';
+      const clockEl = document.getElementById('live-clock');
+      if (clockEl) clockEl.textContent = timeStr;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toast-message');
+      msgEl.textContent = message;
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    function copyEmailAddress() {
+      const email = globalProfile.email || 'harshit.y.1809@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        showToast('Copied to clipboard: ' + email);
+      }).catch(() => {
+        showToast('Email: ' + email);
+      });
+    }
+
+    // ==========================================
+    // 5. INQUIRY FORM SUBMISSION (DIRECT TO MYSQL)
+    // ==========================================
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contact-submit-btn');
+      const originalText = btn.innerHTML;
+
+      const payload = {
+        name: document.getElementById('contact-name').value.trim(),
+        email: document.getElementById('contact-email').value.trim(),
+        message: document.getElementById('contact-message').value.trim()
+      };
+
+      btn.disabled = true;
+      btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Transmitting...</span>';
+      lucide.createIcons();
+
+      try {
+        const res = await fetch('/api/inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          btn.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4 text-white"></i><span>Message Transmitted</span>';
+          lucide.createIcons();
+          showToast('Inquiry received! I will review your message shortly.');
+          document.getElementById('contact-form').reset();
+        } else {
+          throw new Error(data.error || 'Submission failed');
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        showToast('Failed to deliver message. Please contact via direct email.');
+      } finally {
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+          lucide.createIcons();
+        }, 3000);
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') document.getElementById('project-modal').classList.add('hidden');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      loadProfile();
+      loadItems('all');
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
